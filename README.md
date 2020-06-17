@@ -6,8 +6,8 @@
 
 # WINDOWS
 
--instalar o love
--altere a localização dentro do arquivo abrirJogo.bat
+- Instalar o love
+- Altere a localização dentro do arquivo abrirJogo.bat
 Para poder executar o arquivo abrirJogo.bat, altere a localização do love em seu computador. [video](https://youtu.be/4UHLDAnCrfQ)
 
 # LINUX
