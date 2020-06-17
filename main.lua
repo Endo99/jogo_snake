@@ -26,16 +26,19 @@ function love.load()
     delayAppear = 0.1
     timerAppearApple = delayAppear
     apples = {}
-    getApple = true
+    getApple = false
     
     -- Maça
 
-
-
+    -- Outras Funcionalidades
+    x = love.math.random(50, 700)
+    y = love.math.random(50, 500)
+    -- Outras Funcionalidades
 end
 
 function love.update(dt)
-    
+    moveSnake(dt)
+    randomMaca(dt)
 end
 
 --controle dos movimentos do personagem
@@ -78,19 +81,23 @@ function pegarMaca(dt)
 end
 
 -- Aparecer a maçã aleatoriamente na tela
+-- Não aparece a maçã, acho que fiz algo de errado.
 function randomMaca(dt)
     timerAppearApple = timerAppearApple - (1 * dt)
     if timerAppearApple < 0 then
         getApple = true
     end
 
-    newApple = {xMac = love.math.random(50, 700),yMac = love.math.random(50, 500),
-    newImageApple = apple }
-    table.insert(apples, newImageApple)
-    getApple = false
-    timerAppearApple = delayAppear
+    if love.keyboard.isDown("space") and getApple then
+        newApple = { xMac = x,yMac = y,
+        newImageApple = apple }
+        table.insert(apples, newImageApple)
+        getApple = false
+        timerAppearApple = delayAppear
+    end
 
-    for i, mace in ipairs (apples) do
+    for i, mace in ipairs (apples) 
+    do
         apple.yMac = apple.yMac - (500 * dt)
         if apple.yMac < 0 then
             table.remove(apples, i)
@@ -104,9 +111,13 @@ function aumentarTamanhoSnake(dt)
 end
 
 function love.draw()
+    for i, mace in ipairs (apples)
+    do
+        love.graphics.draw(mace.apple, mace.xMac, mace.yMac, 0, 1, 1,
+        apple:getWidth() / 2, apple.getHeight())
+    end
+
     love.graphics.setBackgroundColor(255, 255, 255)
-    love.graphics.setColor(255, 255, 255)
-    love.graphics.draw(apple, xMac, yMac)
     love.graphics.setColor(0, 255, 255)
     love.graphics.circle("fill", snake.posX, snake.posY, w, h)
     
